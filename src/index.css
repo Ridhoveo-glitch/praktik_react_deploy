@@ -1,0 +1,376 @@
+/* src/index.css */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #060913;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #f8fafc;
+  overflow-x: hidden;
+}
+
+/* Background Super Ramai & Futuristik */
+.sneaker-bg-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 1) 0%, #060913 100%);
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Efek Orb Cahaya Latar Belakang yang Berdenyut */
+.neon-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 1;
+  pointer-events: none;
+  animation: orbPulse 8s ease-in-out infinite alternate;
+}
+.orb-1 { width: 350px; height: 350px; background: rgba(56, 189, 248, 0.12); top: 10%; left: 5%; }
+.orb-2 { width: 400px; height: 400px; background: rgba(139, 92, 246, 0.12); bottom: 5%; right: 5%; animation-delay: 4s; }
+
+@keyframes orbPulse {
+  0% { transform: scale(1) translateY(0); opacity: 0.6; }
+  100% { transform: scale(1.2) translateY(-20px); opacity: 1; }
+}
+
+/* Dekorasi Kartu Sepatu Melayang di Samping (Kiri & Kanan) */
+.side-showcase {
+  position: absolute;
+  top: 0;
+  width: 22%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.side-showcase.left { left: 3%; }
+.side-showcase.right { right: 3%; }
+
+.moving-shoe-card {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  padding: 18px;
+  border-radius: 22px;
+  width: 170px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  animation: floatRack 6s ease-in-out infinite;
+}
+
+.moving-shoe-card.delayed {
+  animation-delay: 3s;
+}
+
+@keyframes floatRack {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(2deg); }
+}
+
+/* Kartu Formulir Utama di Tengah */
+.login-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 480px;
+  background: rgba(11, 17, 32, 0.85);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 2.5rem;
+  border-radius: 30px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+/* Animasi Sepatu Utama */
+@keyframes floatShoe {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-10px) scale(1.03); }
+}
+.shoe-animated {
+  animation: floatShoe 4s ease-in-out infinite;
+  filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.7));
+  transition: all 0.4s ease;
+}
+
+/* Animasi Produk di E-Commerce */
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+.product-card-anim {
+  animation: cardFloat 5s ease-in-out infinite;
+}
+.product-card-anim:nth-child(even) {
+  animation-delay: 2.5s;
+}
+
+@media (max-width: 1024px) {
+  .side-showcase { display: none; }
+  .login-card { padding: 1.8rem; }
+}
+
+/* Tambahkan di bagian bawah src/index.css */
+@keyframes screenZoomOut {
+  0% { transform: scale(1); opacity: 1; filter: blur(0px); }
+  100% { transform: scale(1.15); opacity: 0; filter: blur(15px); }
+}
+
+.screen-transition-exit {
+  animation: screenZoomOut 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Animasi Tirai Sepatu Penutup Layar */
+@keyframes slideCurtainLeft {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slideCurtainRight {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}
+
+.shoe-curtain-left, .shoe-curtain-right {
+  position: fixed;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #0b1120 0%, #060913 100%);
+  border-right: 2px solid rgba(56, 189, 248, 0.4);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(0,0,0,0.9);
+}
+
+.shoe-curtain-left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.shoe-curtain-right {
+  right: 0;
+  border-left: 2px solid rgba(56, 189, 248, 0.4);
+  border-right: none;
+  transform: translateX(100%);
+}
+
+.active-curtain-left {
+  animation: slideCurtainLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.active-curtain-right {
+  animation: slideCurtainRight 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Tambahkan di bagian bawah src/index.css */
+@keyframes bounceCart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); color: #38bdf8; }
+}
+.cart-bounce {
+  animation: bounceCart 0.5s ease;
+}
+
+@keyframes scaleUpModal {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.modal-anim {
+  animation: scaleUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Animasi Pintu Gerbang Masuk / Keluar Bergeser Buka-Tutup */
+@keyframes gateCloseLeft {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes gateCloseRight {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes gateOpenLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes gateOpenRight {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+.portal-gate-left, .portal-gate-right {
+  position: fixed;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #070b14 0%, #0f172a 100%);
+  border-right: 2px solid rgba(56, 189, 248, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 60px rgba(0,0,0,0.9);
+}
+
+.portal-gate-left { left: 0; transform: translateX(-100%); }
+.portal-gate-right { right: 0; border-left: 2px solid rgba(56, 189, 248, 0.5); border-right: none; transform: translateX(100%); }
+
+.gate-closing-left { animation: gateCloseLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.gate-closing-right { animation: gateCloseRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+.gate-opening-left { animation: gateOpenLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.gate-opening-right { animation: gateOpenRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* src/index.css - Tambahkan di bawah */
+@keyframes smoothFadeOut {
+  0% { opacity: 1; transform: scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: scale(1.05); filter: blur(10px); }
+}
+.smooth-exit {
+  animation: smoothFadeOut 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  pointer-events: none;
+}
+
+/* --- TEMA AKUARIUM --- */
+.aquarium-bg {
+  background: linear-gradient(180deg, #020617 0%, #0369a1 50%, #082f49 100%) !important;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -50px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
+  animation: riseUp var(--duration) ease-in infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes riseUp {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translateY(-50vh) translateX(20px) scale(1.2); }
+  100% { transform: translateY(-120vh) translateX(-20px) scale(1.5); opacity: 0; }
+}
+
+/* --- ANIMASI MENGIKAT TALI SEPATU (AUTO-LACING) --- */
+.lacing-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 11, 20, 0.92);
+  backdrop-filter: blur(15px);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.shoelace-container {
+  position: relative;
+  width: 120px;
+  height: 180px;
+  border-left: 4px dashed rgba(56, 189, 248, 0.4);
+  border-right: 4px dashed rgba(56, 189, 248, 0.4);
+  margin-bottom: 2rem;
+}
+
+.lace-strand {
+  position: absolute;
+  height: 4px;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
+  animation: laceCross 1.2s ease-in-out infinite alternate;
+}
+
+.lace-1 { top: 20%; width: 100%; transform-origin: left; }
+.lace-2 { top: 50%; width: 100%; transform-origin: right; animation-delay: 0.2s; }
+.lace-3 { top: 80%; width: 100%; transform-origin: left; animation-delay: 0.4s; }
+
+@keyframes laceCross {
+  0% { transform: scaleX(0.4) rotate(0deg); opacity: 0.3; }
+  100% { transform: scaleX(1) rotate(12deg); opacity: 1; }
+}
+
+.lacing-text {
+  color: #38bdf8;
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  animation: pulseText 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseText {
+  0% { opacity: 0.5; text-shadow: 0 0 5px rgba(56,189,248,0.2); }
+  100% { opacity: 1; text-shadow: 0 0 20px rgba(56,189,248,0.8); }
+}
+
+/* --- ANIMASI PINTU GERBANG GAMBAR SEPATU --- */
+.portal-shoe-gate-left, .portal-shoe-gate-right {
+  position: fixed;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #070b14 0%, #0f172a 100%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 80px rgba(0,0,0,0.9);
+  will-change: transform;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.portal-shoe-gate-left { 
+  left: 0; 
+  transform: translate3d(-100%, 0, 0); 
+  border-right: 3px solid #38bdf8; 
+}
+.portal-shoe-gate-right { 
+  right: 0; 
+  transform: translate3d(100%, 0, 0); 
+  border-left: 3px solid #38bdf8; 
+}
+
+.gate-closing-left { animation: gateCloseLeft 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.gate-closing-right { animation: gateCloseRight 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.gate-opening-left { animation: gateOpenLeft 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.gate-opening-right { animation: gateOpenRight 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+
+@keyframes gateCloseLeft { 
+  0% { transform: translate3d(-100%, 0, 0); } 
+  100% { transform: translate3d(0, 0, 0); } 
+}
+@keyframes gateCloseRight { 
+  0% { transform: translate3d(100%, 0, 0); } 
+  100% { transform: translate3d(0, 0, 0); } 
+}
+@keyframes gateOpenLeft { 
+  0% { transform: translate3d(0, 0, 0); } 
+  100% { transform: translate3d(-100%, 0, 0); } 
+}
+@keyframes gateOpenRight { 
+  0% { transform: translate3d(0, 0, 0); } 
+  100% { transform: translate3d(100%, 0, 0); } 
+}
